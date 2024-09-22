@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/script.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/dotWave.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <main class="h-screen bg-[#20293a]">
+        <div class="flex justify-center">
+            <form id="search-id" class="flex items-center absolute px-2 mt-5">
+                <i class="fa-solid absolute fa-magnifying-glass text-slate-600"></i>
+                <input placeholder="username" type="text" class="bg-slate-900 px-6 text-white rounded-lg h-8 w-80"></input>
+            </form>
+            <img src="public/hero-image-github-profile.png" alt="logo"/>
+        </div>
+        <div class="flex justify-center bg-[#20293a]">
+            <div class="w-4/5">
+                <div class="flex gap-8">
+                    <div class="relative bottom-5">
+                        <img id="avatar-id" class="border-4 rounded-lg border-slate-800 bg-slate-800 w-16 h-16 bottom-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhZGUAlyTIsItIo008ezD9zclGktUI1BOizscUd5lTo2ZWPQCBTfhnjZAw07hs1ErrnuY&usqp=CAU"/>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="mt-2 p-2 h-10 rounded-xl flex bg-slate-900">
+                            <h1 class="text-slate-600 border-slate-600 border-r px-2">Followers</h1>
+                            <h1 id="followers-id" class="text-white px-2"></h1>
+                        </div>
+                        <div class="mt-2 p-2 h-10 rounded-xl flex bg-slate-900">
+                            <h1 class="text-slate-600 border-slate-600 border-r px-2">Following</h1>
+                            <h1 id="following-id" class="text-white px-2"></h1>
+                        </div>
+                        <div class="mt-2 p-2 h-10 rounded-xl flex bg-slate-900">
+                            <h1 class="text-slate-600 border-slate-600 border-r px-2">Location</h1>
+                            <h1 id="location-id" class="text-white px-2"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-white font-bold">GitHub</h1>
+                    <h1 class="text-white text-xs">How people build software.</h1>
+                </div>
+                <div id="repos-container-id">
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
