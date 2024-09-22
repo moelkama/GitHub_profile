@@ -50,7 +50,7 @@ function    fetch_user_info(user)
                 document.getElementById('location-id').innerHTML = data.location;
             else
                 document.getElementById('location-id').innerHTML = "Not Set";
-            // fetch_repos(user);
+            fetch_repos(user);
         })
         .catch(err => {
             console.log('===================');
@@ -96,15 +96,15 @@ function    clean_repos()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetch(`https://api.github.com/users/moelkama`)
-    // document.getElementById('search-id').addEventListener('submit', (e) =>{
-    //     e.preventDefault();
-    //     const user = e.target[0].value;
-    //     clean_repos();
-    //     fetch_user_info(user);
-    //     const loader = document.createElement('div');
-    //     loader.innerHTML = `<l-dot-wave size="90" speed="1" color="black" ></l-dot-wave>`;
-    //     loader.className = "w-full h-80 flex items-center justify-center";
-    //     document.getElementById('repos-container-id').appendChild(loader);
-    // })
+    // fetch(`https://api.github.com/users/moelkama`)
+    document.getElementById('search-id').addEventListener('submit', (e) =>{
+        e.preventDefault();
+        const user = e.target[0].value;
+        clean_repos();
+        fetch_user_info(user);
+        const loader = document.createElement('div');
+        loader.innerHTML = `<l-dot-wave size="90" speed="1" color="black" ></l-dot-wave>`;
+        loader.className = "w-full h-80 flex items-center justify-center";
+        document.getElementById('repos-container-id').appendChild(loader);
+    })
 });
