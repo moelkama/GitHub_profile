@@ -1,10 +1,14 @@
-var data = null;
+var d = null;
 
 function repo_component(r) {
-    return `<div class="p-4 bg-yellow-600 rounded-xl w-11/12 bg-gradient-to-r from-[#111629] to-[#1c1b46]">
+    console.log(r);
+    var description = '';
+    if (r.description)
+        description = r.description
+    return `<a href="${r.html_url}" target="_blank" class="transition duration-1000 ease-linear hover:from-[#2f3859] hover:to-[#39386f] p-4 bg-yellow-600 rounded-xl w-11/12 bg-gradient-to-r from-[#111629] to-[#1c1b46]">
                 <div class="flex flex-col gap-1">
                     <h1 class="text-[#a9b0bd]">${r.name}</h1>
-                    <h1 class="text-[#727b93]">Placeat deserunt alias quae blanditiis</h1>
+                    <h1 class="text-[#727b93]">${description}</h1>
                 </div>
                 <div class="flex gap-4">
                     <div class="flex items-center gap-1">
@@ -19,14 +23,21 @@ function repo_component(r) {
                         <h1 class="text-sm text-[#8e939f]">updated ${r.updated_at} ago</h1>
                     </div>
                 </div>
-            </div>`;
+            </a>`;
 }
 
 function display_all_repos()
 {
-    data.forEach(element => {
-        repos.appendChild(repo_component(element));
-    });
+    if (d)
+    {
+        clean_repos();
+        var repos = document.createElement('div');
+        repos.className = 'w-full grid grid-cols-1 md:grid-cols-2 align-center my-6 gap-6';
+        d.forEach(element => {
+            repos.innerHTML += repo_component(element);
+        });
+        document.getElementById('repos-container-id').appendChild(repos);
+    }
 }
 
 function    fetch_user_info(user)
@@ -53,7 +64,6 @@ function    fetch_user_info(user)
             fetch_repos(user);
         })
         .catch(err => {
-            console.log('===================');
             clean_repos();
             const elem = document.createElement('div');
             elem.className = 'w-full h-80 flex items-center justify-center';
@@ -69,42 +79,37 @@ function fetch_repos(user) {
         .then(response => response.json())
         .then(data => {
             clean_repos();
-            data = data;
-            const repos = document.createElement('div');
-            repos.className = 'w-full grid grid-cols-2 align-center my-6 gap-6';
-            for (let i = 0; i < data.length && i < 4; i++) {
-                const r = data[i];
-                const repo = document.createElement('div');
-                repo.innerHTML = repo_component(r);
-                repos.appendChild(repo);
-            };
+            d = data;
+            var repos = document.createElement('div');
+            repos.id = 'repos-id';
+            repos.className = 'w-full grid grid-cols-1 md:grid-cols-2 align-center my-6 gap-6';
+            for (let i = 0; i < data.length && i < 4; i++)
+                repos.innerHTML += repo_component(data[i]);
             document.getElementById('repos-container-id').appendChild(repos);
-            // if (data.length > 4)
-            // {
-            //     const elem = document.createElement('div');
-            //     elem.className = 'w-full flex items-center p-4';
-            //     elem.innerHTML = `<button onclick="display_all_repos()" class="text-white">+${data.length - 4} more</button>`;
-            //     repos.appendChild(elem);
-            // }
+            if (data.length > 4)
+            {
+                var elem = document.createElement('div');
+                elem.className = 'w-full flex items-center justify-center my-4';
+                elem.innerHTML = `<button onclick="display_all_repos()" class="text-white">+${data.length - 4} more</button>`;
+                document.getElementById('repos-container-id').appendChild(elem);
+            }
         })
 }
 
 function    clean_repos()
 {
-    if (document.getElementById('repos-container-id'))
-        document.getElementById('repos-container-id').innerHTML = '';
+    document.getElementById('repos-container-id').innerHTML = '';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // fetch(`https://api.github.com/users/moelkama`)
     document.getElementById('search-id').addEventListener('submit', (e) =>{
         e.preventDefault();
         const user = e.target[0].value;
+        // var user = 'moelkama';
         clean_repos();
         fetch_user_info(user);
-        const loader = document.createElement('div');
-        loader.innerHTML = `<l-dot-wave size="90" speed="1" color="black" ></l-dot-wave>`;
-        loader.className = "w-full h-80 flex items-center justify-center";
-        document.getElementById('repos-container-id').appendChild(loader);
     })
 });
+
+//#e55897
+//#bb6ae6
